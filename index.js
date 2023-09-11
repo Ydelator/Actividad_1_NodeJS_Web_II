@@ -20,15 +20,14 @@ if (fs.existsSync("data")) {
     })
 }
 
-let id = 1;
 app.post("/formulario", (req, res)=>{
-    const {nombre, apellido, titulo, autor, editorial, ano} = req.body;
+    const {ID, nombre, apellido, titulo, autor, editorial, ano} = req.body;
     console.log(req.body)
-    if (!nombre || !apellido || !titulo || !autor || !editorial || !ano) {
+    if (!ID || !nombre || !apellido || !titulo || !autor || !editorial || !ano) {
         return res.redirect('/error.html')
     }
-    fs.writeFileSync(`data/id_${id}.txt`,`id: 1 \nNombre: ${nombre} \nApellido: ${apellido} \nTitulo: ${titulo} \nAutor: ${autor} \nEditorial: ${editorial} \nAño: ${ano}`)
-    id++
+    fs.writeFileSync(`data/id_${ID}.txt`,`id: 1 \nNombre: ${nombre} \nApellido: ${apellido} \nTitulo: ${titulo} \nAutor: ${autor} \nEditorial: ${editorial} \nAño: ${ano}`)
+    //res.download(`data/id_${ID}.txt`)
     res.send(`Archivo de datos descargado. Verificar la carpeta "data"`)
 })
 
