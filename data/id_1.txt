@@ -1,7 +1,0 @@
-id: 1 
-Nombre: Yan 
-Apellido: De La Torre 
-Titulo: La Celestina 
-Autor: Fernando de Rojas 
-Editorial: Santillana 
-Año: 1499
