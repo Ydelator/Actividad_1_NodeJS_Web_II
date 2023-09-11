@@ -26,9 +26,27 @@ app.post("/formulario", (req, res)=>{
     if (!ID || !nombre || !apellido || !titulo || !autor || !editorial || !ano) {
         return res.redirect('/error.html')
     }
-    fs.writeFileSync(`data/id_${ID}.txt`,`id: 1 \nNombre: ${nombre} \nApellido: ${apellido} \nTitulo: ${titulo} \nAutor: ${autor} \nEditorial: ${editorial} \nAño: ${ano}`)
-    //res.download(`data/id_${ID}.txt`)
-    res.send(`Archivo de datos descargado. Verificar la carpeta "data"`)
+    const fileName = `data/id_${ID}.txt`;
+    const cuerpo =  `id: ${ID} \nNombre: ${nombre} \nApellido: ${apellido} \nTitulo: ${titulo} \nAutor: ${autor} \nEditorial: ${editorial} \nAño: ${ano}`;
+    fs.writeFile(fileName, cuerpo, (err)=>{
+        if (err) {
+            res.send('Ha ocurido un error al descargar el archivo')
+        } else {
+            res.download(fileName, (err)=>{
+                if (err) {
+                    console.error(err)
+                }else{
+                    console.log('Archivo descargado con exito')
+                }
+            })
+        }
+    })
+
+  
+
+    //res.redirect('/download')
+
+    //res.send(`Archivo de datos descargado. Verificar la carpeta "data"`)
 })
 
 app.listen(port)
