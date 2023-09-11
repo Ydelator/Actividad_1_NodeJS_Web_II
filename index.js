@@ -7,6 +7,19 @@ const port = 3000;
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}));
 
+//Creacion de directorio
+if (fs.existsSync("data")) {
+    console.log("El directorio ya existe")
+} else {
+    fs.mkdir("data",(error)=>{
+        if (error) {
+            console.log(error.message)
+        }else{
+            console.log("Directorio creado on exito")
+        }
+    })
+}
+
 let id = 1;
 app.post("/formulario", (req, res)=>{
     const {nombre, apellido, titulo, autor, editorial, ano} = req.body;
